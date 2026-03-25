@@ -9,7 +9,7 @@ import json
 import argparse
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from collections import defaultdict
 
@@ -143,7 +143,7 @@ def fetch_scf_issues(bbox: list, days_back: int = 365) -> list:
     Returns a list of issue dicts.
     """
     min_lat, min_lng, max_lat, max_lng = bbox
-    after_date = (datetime.utcnow() - timedelta(days=days_back)).strftime(
+    after_date = (datetime.now(timezone.utc) - timedelta(days=days_back)).strftime(
         "%Y-%m-%dT00:00:00Z"
     )
 
